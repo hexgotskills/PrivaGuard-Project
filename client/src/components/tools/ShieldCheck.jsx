@@ -29,7 +29,7 @@ function ShieldCheck() {
     setError(null);
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL} /api/shieldcheck`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/shieldcheck`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url })

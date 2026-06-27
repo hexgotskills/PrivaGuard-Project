@@ -253,8 +253,8 @@ export default function SocialShield({ onClose }) {
               </div>
               <div className="ss-intro-text">{scenario.intro}</div>
               {scenario.type === 'email' && <EmailDisplay scenario={scenario} selected={selected} phase={phase} onFlagClick={toggleFlag} />}
-              {scenario.type === 'sms'   && <SMSDisplay   scenario={scenario} selected={selected} phase={phase} onFlagClick={toggleFlag} />}
-              {scenario.type === 'call'  && <CallDisplay  scenario={scenario} selected={selected} phase={phase} onFlagClick={toggleFlag} />}
+              {scenario.type === 'sms' && <SMSDisplay scenario={scenario} selected={selected} phase={phase} onFlagClick={toggleFlag} />}
+              {scenario.type === 'call' && <CallDisplay scenario={scenario} selected={selected} phase={phase} onFlagClick={toggleFlag} />}
             </div>
             <div className="ss-action-bar">
               <span className="ss-flag-count">
@@ -275,9 +275,9 @@ export default function SocialShield({ onClose }) {
           <>
             <div className="ss-scenario-wrap">
               <div className="ss-intro-text">{scenario.intro}</div>
-              {scenario.type === 'email' && <EmailDisplay scenario={scenario} selected={selected} phase={phase} onFlagClick={() => {}} />}
-              {scenario.type === 'sms'   && <SMSDisplay   scenario={scenario} selected={selected} phase={phase} onFlagClick={() => {}} />}
-              {scenario.type === 'call'  && <CallDisplay  scenario={scenario} selected={selected} phase={phase} onFlagClick={() => {}} />}
+              {scenario.type === 'email' && <EmailDisplay scenario={scenario} selected={selected} phase={phase} onFlagClick={() => { }} />}
+              {scenario.type === 'sms' && <SMSDisplay scenario={scenario} selected={selected} phase={phase} onFlagClick={() => { }} />}
+              {scenario.type === 'call' && <CallDisplay scenario={scenario} selected={selected} phase={phase} onFlagClick={() => { }} />}
             </div>
             <div className="ss-result-panel">
               <div className={`ss-result-banner`} style={{
