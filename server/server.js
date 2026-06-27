@@ -11,8 +11,22 @@ import metaCleanerRoute from './routes/metacleaner.js';
 import cookieInspectorRoute from './routes/cookieinspector.js';
 
 const app = express();
+const corsOptions = {
+  origin: [
+    'http://localhost:5173',
+    'http://127.0.0.1:5173',
+    'https://privaguard-five.vercel.app'
+  ],
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type'],
+  optionsSuccessStatus: 200
+};
 
-app.use(cors());
+// Handle any OPTIONS that slip through to Express
+app.options('*', cors(corsOptions));
+
+// Apply CORS to all other routes
+app.use(cors(corsOptions));
 
 app.use(express.json({ limit: '2mb' }));
 
