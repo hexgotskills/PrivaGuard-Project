@@ -12,15 +12,8 @@ import cookieInspectorRoute from './routes/cookieinspector.js';
 
 const app = express();
 
-app.use(cors({
-  origin: [
-    'http://localhost:5173',
-    'http://127.0.0.1:5173',
-    'https://privaguard-five.vercel.app'
-  ],
-  methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type']
-}));
+app.use(cors());
+
 app.use(express.json({ limit: '2mb' }));
 
 app.use('/api/privacylens', privacyLensRoute);
