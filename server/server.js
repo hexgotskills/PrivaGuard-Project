@@ -27,8 +27,20 @@ app.use('/api/metacleaner', metaCleanerRoute);
 app.use('/api/cookieinspector', cookieInspectorRoute);
 
 // Global error handler
+
 app.use((err, req, res, next) => {
-  res.status(err.status || 500).json({ error: err.message || 'Internal server error' });
+  res.status(err.status || 500).json({
+    error: err.message || "Internal server error"
+  });
+});
+
+// Health check route
+app.get("/", (req, res) => {
+  res.json({
+    status: "online",
+    service: "PrivaGuard Backend",
+    version: "1.0.0"
+  });
 });
 
 const PORT = process.env.PORT || 5001;
