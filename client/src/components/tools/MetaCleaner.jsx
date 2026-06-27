@@ -23,7 +23,7 @@ export default function MetaCleaner() {
     try {
       const fd = new FormData();
       fd.append('file', f);
-      const res = await fetch('/api/metacleaner/extract', { method: 'POST', body: fd });
+      const res = await fetch(`${import.meta.env.VITE_API_URL} /api/metacleaner/extract`, { method: 'POST', body: fd });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Extraction failed.');
       setResult(data);

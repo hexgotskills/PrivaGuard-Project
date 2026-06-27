@@ -15,7 +15,7 @@ export default function CookieInspector() {
     setError(null);
     setResult(null);
     try {
-      const res = await fetch('/api/cookieinspector', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL} /api/cookieinspector`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url })

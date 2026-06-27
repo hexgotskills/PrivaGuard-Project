@@ -11,7 +11,7 @@ function ShieldCheck() {
 
   useEffect(() => {
     document.title = 'ShieldCheck — PrivaGuard';
-    
+
     return () => {
       setUrl('https://');
       setResult(null);
@@ -24,23 +24,23 @@ function ShieldCheck() {
       setError('Please enter a valid URL starting with http:// or https://');
       return;
     }
-    
+
     setLoading(true);
     setError(null);
-    
+
     try {
-      const response = await fetch('/api/shieldcheck', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL} /api/shieldcheck`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url })
       });
-      
+
       const data = await response.json();
-      
+
       if (!response.ok) {
         throw new Error(data.error || 'Failed to check headers');
       }
-      
+
       setResult(data);
     } catch (err) {
       setError(err.message);
@@ -67,9 +67,9 @@ function ShieldCheck() {
     <div>
       <h2 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '4px' }}>ShieldCheck</h2>
       <p style={{ color: 'var(--text-2)', marginBottom: '24px' }}>Audit any website's HTTP security headers</p>
-      
+
       <ErrorMessage message={error} />
-      
+
       <input
         type="url"
         value={url}
@@ -89,12 +89,12 @@ function ShieldCheck() {
         onFocus={(e) => e.target.style.borderColor = 'var(--border-2)'}
         onBlur={(e) => e.target.style.borderColor = 'var(--border)'}
       />
-      
+
       <div style={{ fontSize: '12px', color: 'var(--text-3)', marginTop: '8px' }}>
         We make one public HTTP request to fetch response headers. No authentication, cookies, or user data are transmitted.
       </div>
-      
-      <button 
+
+      <button
         onClick={handleCheck}
         className="btn-primary btn-full"
         style={{ marginTop: '16px' }}

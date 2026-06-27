@@ -11,7 +11,7 @@ function BreachWatch() {
 
   useEffect(() => {
     document.title = 'BreachWatch — PrivaGuard';
-    
+
     return () => {
       setEmail('');
       setResult(null);
@@ -24,23 +24,23 @@ function BreachWatch() {
       setError('Please enter a valid email address.');
       return;
     }
-    
+
     setLoading(true);
     setError(null);
-    
+
     try {
-      const response = await fetch('/api/breachwatch', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL} /api/breachwatch`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email })
       });
-      
+
       const data = await response.json();
-      
+
       if (!response.ok) {
         throw new Error(data.error || 'Failed to check breaches');
       }
-      
+
       setResult(data);
     } catch (err) {
       setError(err.message);
@@ -61,9 +61,9 @@ function BreachWatch() {
     <div>
       <h2 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '4px' }}>BreachWatch</h2>
       <p style={{ color: 'var(--text-2)', marginBottom: '24px' }}>Check if your email has appeared in a data breach</p>
-      
+
       <ErrorMessage message={error} />
-      
+
       <input
         type="email"
         value={email}
@@ -83,12 +83,12 @@ function BreachWatch() {
         onFocus={(e) => e.target.style.borderColor = 'var(--border-2)'}
         onBlur={(e) => e.target.style.borderColor = 'var(--border)'}
       />
-      
+
       <div style={{ fontSize: '12px', color: 'var(--text-3)', marginTop: '8px' }}>
         🔒 Your email is sent only to the XposedOrNot public API. We never store, log, or retain it.
       </div>
-      
-      <button 
+
+      <button
         onClick={handleCheck}
         className="btn-primary btn-full"
         style={{ marginTop: '16px' }}

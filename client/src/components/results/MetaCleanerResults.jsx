@@ -10,7 +10,13 @@ export default function MetaCleanerResults({ data, file, onBack }) {
     try {
       const fd = new FormData();
       fd.append('file', file);
-      const res = await fetch('/api/metacleaner/clean', { method: 'POST', body: fd });
+      const res = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/metacleaner/clean`,
+        {
+          method: 'POST',
+          body: fd,
+        }
+      );
       if (!res.ok) throw new Error('Cleaning failed.');
       const blob = await res.blob();
       const url = URL.createObjectURL(blob);

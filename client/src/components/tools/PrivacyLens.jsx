@@ -11,7 +11,7 @@ function PrivacyLens() {
 
   useEffect(() => {
     document.title = 'PrivacyLens — PrivaGuard';
-    
+
     // Clear state when unmounted
     return () => {
       setInputText('');
@@ -25,23 +25,23 @@ function PrivacyLens() {
       setError('Please provide at least 100 characters of a privacy policy.');
       return;
     }
-    
+
     setLoading(true);
     setError(null);
-    
+
     try {
-      const response = await fetch('/api/privacylens', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL} /api/privacylens`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text: inputText })
       });
-      
+
       const data = await response.json();
-      
+
       if (!response.ok) {
         throw new Error(data.error || 'Failed to analyze policy');
       }
-      
+
       setResult(data);
     } catch (err) {
       setError(err.message);
@@ -62,9 +62,9 @@ function PrivacyLens() {
     <div>
       <h2 style={{ fontSize: '20px', fontWeight: 600, marginBottom: '4px' }}>PrivacyLens</h2>
       <p style={{ color: 'var(--text-2)', marginBottom: '24px' }}>Decode any privacy policy into plain English</p>
-      
+
       <ErrorMessage message={error} />
-      
+
       <textarea
         value={inputText}
         onChange={(e) => setInputText(e.target.value)}
@@ -84,7 +84,7 @@ function PrivacyLens() {
         onFocus={(e) => e.target.style.borderColor = 'var(--border-2)'}
         onBlur={(e) => e.target.style.borderColor = 'var(--border)'}
       />
-      
+
       <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '8px' }}>
         <div style={{ fontSize: '12px', color: 'var(--text-3)' }}>
           Tip: Longer policies give more accurate results. Minimum 100 characters.
@@ -93,8 +93,8 @@ function PrivacyLens() {
           {inputText.length.toLocaleString()} characters
         </div>
       </div>
-      
-      <button 
+
+      <button
         onClick={handleAnalyze}
         className="btn-primary btn-full"
         style={{ marginTop: '16px' }}
